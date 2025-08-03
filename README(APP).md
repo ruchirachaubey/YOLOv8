@@ -2,25 +2,7 @@
 
 This project is a **real-time tool detection mobile app** designed for space station environments. It helps detect critical tools like **Fire Extinguishers**, **ToolBoxes**, and **Oxygen Tanks** using a trained **YOLOv8 model** running directly on your Android device. If any tool goes missing or is detected with low confidence, the app immediately alerts the user.
 
----
-## ⚠️ Current Status
-
-> **Note**: This app is **not yet fully functional**. We developed it within a tight **3-day deadline** for a project challenge.
-
-Some core features are implemented and working, like:
-- Real-time detection
-- Alerts for missing tools
-- Logging tool data locally (SQLite)
-
-However, with more time, we plan to:
-- Improve app stability and UI
-- Add **voice alerts** using Text-to-Speech (TTS)
-- Integrate **ARCore** for AR-based tool guidance
-- Enable Firebase sync for cloud-based monitoring
-
-We see strong potential for this project with more development time.
-
----
+--
 
 ## 💡 What This App Does
 
