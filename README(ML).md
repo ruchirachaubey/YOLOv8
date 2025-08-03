@@ -54,7 +54,7 @@ We performed detailed analysis on incorrect detections and categorized failures 
 
 | Parameter   | Original | Improved |
 |-------------|----------|----------|
-| `epochs`    | 5        | 10       |
+| `epochs`    | 10       | 20       |
 | `mosaic`    | 0.1      | 0.5      |
 | `optimizer` | AdamW    | SGD (tried) |
 | `lr0`       | 0.001    | 0.0005   |
