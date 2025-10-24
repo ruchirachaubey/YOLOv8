@@ -8,7 +8,7 @@ This project delivers a **real-time tool detection mobile application** designed
 
 | Feature | Description | Status |
 | :--- | :--- | :--- |
-| **Real-Time Detection** | Uses the phone’s camera to detect tools like **Fire Extinguishers**, **ToolBoxes**, and **Oxygen Tanks**. | ✅ Implemented |
+| **Real-Time Detection** | Uses the camera to detect tools like **Fire Extinguishers**, **ToolBoxes**, and **Oxygen Tanks**. | ✅ Implemented |
 | **Automated Alerts** | Sends immediate **alerts** if any critical tool is missing or if the detection confidence drops below 50%. | ✅ Implemented |
 | **Local Tracking** | Tracks and stores the **last seen time and location** of each tool using a local database. | ✅ Implemented |
 | **Cloud Ready** | Supports optional **cloud sync** with Firebase for data access from ground stations. | 🛠 Planned |
