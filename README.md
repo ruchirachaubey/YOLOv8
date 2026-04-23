@@ -1,71 +1,83 @@
+# 🚀 SpaceSafetyScanner: YOLOv8-Based Space Object Detection
+
 This project leverages YOLOv8 to detect essential safety objects inside a synthetic space station environment (provided by Falcon Digital Twin). The aim is to enhance **equipment tracking**, **crew safety**, and **inventory management** in space missions.
 
 ---
 
+## 🌐 Demo Application (Frontend)
+
+An interactive web interface is built using Streamlit to make the model usable in real time.
+
+### Features
+- Upload space station images  
+- Detect safety equipment (Fire Extinguishers, Oxygen Tanks, Toolboxes)  
+- Adjustable confidence threshold  
+- Visual bounding boxes with detection scores  
+- Side-by-side comparison (Original vs Detected image)  
+
 ## 📁 Project Structure
 
-| File/Folder           | Description                                           |
-|-----------------------|------------------------------------------------------|
-| `best.pt`             | Trained YOLOv8 model (space station object detector) |
-| `yolo_params.yaml`    | Dataset configuration file (train/val/test split)    |
-| `hackathon_project.ipynb` | Full Colab notebook: training, evaluation, failure analysis |
-| `Curves/`             | Model evaluation graphs (`confusion_matrix.png`, `PR_curve.png`, etc.) |
-| `test_predictions3/`  | Test image predictions: `images/` and `labels/`      |
-| `Failure analysis/`   | Images showing model errors and failure types        |
+| File/Folder              | Description                     |
+|--------------------------|---------------------------------|
+| `best.pt`                | Trained YOLOv8 model            |
+| `yolo_params.yaml`       | Dataset configuration file      |
+| `hackathon_project.ipynb`| Training + evaluation notebook  |
+| `Curves/`                | Evaluation graphs               |
+| `test_predictions3/`     | Test predictions                |
+| `Failure analysis/`      | Failure cases                   |
+| `app.py`                 | Streamlit frontend              |
 
 ---
+
+## ⚙️ How to Run
+
+### Install Dependencies
+```bash
+pip install ultralytics streamlit opencv-python pillow
 
 ## 📊 Evaluation Metrics
 
-| Metric         | Validation Set | Test Set |
-|----------------|----------------|----------|
-| Precision      | 95.1%          | 76.0%    |
-| Recall         | 86.6%          | 73.6%    |
-| mAP@0.5        | 90.7%          | 71.2%    |
-| mAP@0.5:0.95   | 78.4%          | 59.3%    |
+| Metric       | Validation | Test |
+|--------------|------------|------|
+| Precision    | 95.1%      | 76.0% |
+| Recall       | 86.6%      | 73.6% |
+| mAP@0.5      | 90.7%      | 71.2% |
+| mAP@0.5:0.95 | 78.4%      | 59.3% |
 
-➡️ **Current mAP on test set: 0.71**
-
-> Given more time, I would further improve accuracy by increasing training epochs, tuning hyperparameters (e.g., optimizer, learning rate), and leveraging GPU resources for longer training.
+**Final Test mAP: 0.71**
 
 ---
 
-## ❌ Failure Analysis & Correction Strategy
+## ❌ Failure Analysis
 
-We performed detailed analysis on incorrect detections and categorized failures into:
+### Wrong Class Prediction
+- Predicted label does not match ground truth  
+- **Solution:** Increase dataset diversity  
 
-1. **Wrong Class Prediction**
-   - Predicted label ≠ Ground truth label.
-   - Fix: Improve class separation with more diverse synthetic data.
+### Poor Bounding Box (Low IoU)
+- Bounding boxes are inaccurate  
+- **Solution:** Use higher resolution + tune IoU  
 
-2. **Poor Box Location (Low IoU)**
-   - Box is misaligned or loose.
-   - Fix: Fine-tune with higher-resolution images and adjusted `mosaic`/`IoU` thresholds.
-
-3. **Missing Detection**
-   - No box predicted for ground truth object.
-   - Fix: Retrain with `single_cls=False` and more balanced data.
-
-✅ **Failure images saved in `Failure analysis/` folder**
+### Missing Detection
+- Object not detected  
+- **Solution:** Improve class balance and retrain  
 
 ---
 
-## 📈 Improvement Techniques Tried
+## 📈 Improvements Applied
 
-| Parameter   | Original | Improved |
-|-------------|----------|----------|
-| `epochs`    | 5        | 10       |
-| `mosaic`    | 0.1      | 0.5      |
-| `optimizer` | AdamW    | SGD (tried) |
-| `lr0`       | 0.001    | 0.0005   |
-
-➡️ Future: Resume training from `best.pt` (warm start) to save time.
+| Parameter      | Before | After |
+|----------------|--------|-------|
+| Epochs         | 5      | 10    |
+| Mosaic         | 0.1    | 0.5   |
+| Optimizer      | AdamW  | SGD (tested) |
+| Learning Rate  | 0.001  | 0.0005 |
 
 ---
 
-## 🛠 How to Use the Model
+## 🚀 Future Work
 
-```python
-from ultralytics import YOLO
-model = YOLO('best.pt')
-results = model.predict(source='your_image.jpg', save=True)
+- Train on larger datasets (synthetic + real)  
+- Advanced hyperparameter tuning  
+- Deploy as API / full web app  
+- Add real-time video detection  
